@@ -11,6 +11,14 @@ import 'element-ui/lib/theme-chalk/index.css'
 // index 是目录的索引未文件   默认使用索引文件
 import router from '@/router'
 
+// 导入公共样式文件
+import '@/styles/index.less'
+
+// 引入axios
+import axios from 'axios'
+// 全局挂载axiso
+Vue.prototype.$http = axios
+
 // 是否开启产品级别提示  不开启   开发阶段  提示越详细越好  开发级别提示
 Vue.config.productionTip = false
 // 使用element - ui
