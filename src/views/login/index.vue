@@ -30,6 +30,8 @@
 </template>
 
 <script>
+// 导入store 中定义好的方法
+import store from '@/store'
 export default {
   data () {
     // 自定义校验规则函数
@@ -74,26 +76,45 @@ export default {
   methods: {
     login () {
       // 对整个表单进行校验
-      this.$refs.loginForm.validate(valid => {
+      this.$refs.loginForm.validate(async valid => {
         if (valid) {
           // 如果校验成功，发起登录的请求
-          console.log('success')
+          // console.log('success')
           // 使用axios进行发送请求
-          this.$http
-            .post(
-              'http://ttapi.research.itcast.cn/mp/v1_0/authorizations',
-              this.loginForm
-            )
-            .then(res => {
-              // res是响应对象   res.data是数据属于响应对象
-              // console.log(res.data)
-              // 验证正确，跳转首页
-              this.$router.push('/')
-            })
-            .catch(() => {
-              // 请求失败的发送错误提示
-              this.$message.error('手机号或验证码错误')
-            })
+          // this.$http
+          //   .post(
+          //     'http://ttapi.research.itcast.cn/mp/v1_0/authorizations',
+          //     this.loginForm
+          //   )
+          //   .then(res => {
+          //     // res是响应对象   res.data是数据属于响应对象
+          //     // console.log(res.data)
+          //     // 登录成功，需要存储用户信息（封装在store中）
+          //     // 调用store中的方法，获取taken中的数据
+          //     store.setUser(res.data.data)
+          //     // 验证正确，跳转首页
+          //     this.$router.push('/')
+          //   })
+          //   .catch(() => {
+          //     // 请求失败的发送错误提示
+          //     this.$message.error('手机号或验证码错误')
+          //   })
+
+          // 使用 await 捕获错误信息，验证错误，使用 try{ 可能会执行报错的额代码 } catch（e）{ 处理错误 }
+          try {
+            // 使用 async  await 进行书写 promise 机制的请求
+            // const res = await this.$http.post('authorizations', this.loginForm)
+            // 因为 res 响应对象的 data 中存储的用户的信息  而 token 存储在 res.data.data 中
+            const {
+              data: { data }
+            } = await this.$http.post('authorizations', this.loginForm)
+            // 调用store中的方法，获取taken中的数据
+            store.setUser(data)
+            // 验证正确，跳转首页
+            this.$router.push('/')
+          } catch (e) {
+            this.$message.error('手机号或验证码错误')
+          }
         }
       })
     }

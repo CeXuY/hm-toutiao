@@ -13,6 +13,8 @@ import Welcome from '@/views/welcome'
 import Article from '@/views/article'
 // 挂载错误组件 404
 import NotFound from '@/views/404'
+// 导入用户信息
+import store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -57,4 +59,19 @@ const router = new VueRouter({
   ]
 })
 
+// 加上全局前置导航守卫
+router.beforeEach((to, from, next) => {
+  // // 如果是登录页面路由   放行
+  // if (to.path === '/login') return next()
+  // // 获取用户信息  如果没有   跳转登录
+  // // store.getUser() 获取的是一个对象，即使没有内容也是个空对象
+  // // 所以从该对象的token中进行判断是否有值
+  // if (!store.getUser().token) return next('/login')
+  // // 放行
+  // next()
+
+  // 优化上面的代码(如果不是登录页，并且没有token   则都跳转login页面)
+  if (to.path !== '/login' && !store.getUser().token) return next('/login')
+  next()
+})
 export default router

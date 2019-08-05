@@ -15,7 +15,9 @@ import router from '@/router'
 import '@/styles/index.less'
 
 // 引入axios
-import axios from 'axios'
+// import axios from 'axios'
+// 挂载配置好的axios
+import axios from '@/api'
 // 全局挂载axiso
 Vue.prototype.$http = axios
 
