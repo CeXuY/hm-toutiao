@@ -15,5 +15,8 @@ export default {
   getUser () {
     //   当拿到空对象时，使用 “或” 出来一下
     return JSON.parse(window.sessionStorage.getItem(KEY) || '{}')
+  },
+  removeUser () {
+    window.sessionStorage.removeItem(KEY)
   }
 }

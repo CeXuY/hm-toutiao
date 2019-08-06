@@ -55,13 +55,14 @@
         <!-- 下拉菜单 -->
         <el-dropdown class="my-dropdown">
           <span class="el-dropdown-link">
-            <img src="../../assets/images/avatar.jpg" alt />
-            天空火花带闪电
+            <img src="photo" alt />
+            <!-- 天空火花带闪电 -->
+            {{name}}
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item icon="el-icon-setting">个人设置</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-lock">退出登录</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-setting" @click.native="setting()">个人设置</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-lock" @click.native="logout()">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
@@ -74,16 +75,37 @@
 </template>
 
 <script>
+// 由于用户信息存在sessionStorage中，故需要引入store 模块
+import store from '@/store'
 export default {
   data () {
     return {
-      isCollapse: false
+      isCollapse: false,
+      name: '',
+      photo: ''
     }
+  },
+  // 在组件创建时需要取数据
+  created () {
+    const user = store.getUser()
+    this.name = user.name
+    this.photo = user.photo
   },
   methods: {
     // 切换侧边栏   收起与展开
     toggle () {
       this.isCollapse = !this.isCollapse
+    },
+    // click绑定的是原生的DOM事件   绑在组件上面会认为是自定义事件
+    // click 可以绑定在组件解析后的DOM上面   需要使用事件修饰符   prevent   native:绑定原生事件
+    setting () {
+      this.$router.push('/setting')
+    },
+    logout () {
+      // 清除用户信息（在本地存储中设置删除sessionStorage中的token信息）
+      store.removeUser()
+      // 路径调换
+      this.$router.push({ name: 'login' })
     }
   }
 }
