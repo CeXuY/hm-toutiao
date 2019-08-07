@@ -1,7 +1,7 @@
 <template>
   <el-container class="wrapper">
     <el-aside :width="isCollapse?'64px':'200px'">
-      <!-- logo    isCollapse  为false,加上nimilogo ;  为true,m默认为  展开状态     -->
+      <!-- logo    isCollapse  为false,加上minilogo ;  为true,m默认为  展开状态     -->
       <div class="logo" :class="{minilogo:isCollapse}"></div>
       <!-- 导航菜单 -->
       <!-- default-active="2"  默认激活的菜单项   指定的其实就是菜单项的index属性的值
@@ -55,7 +55,7 @@
         <!-- 下拉菜单 -->
         <el-dropdown class="my-dropdown">
           <span class="el-dropdown-link">
-            <img src="photo" alt />
+            <img :src="photo" alt />
             <!-- 天空火花带闪电 -->
             {{name}}
             <i class="el-icon-arrow-down el-icon--right"></i>
