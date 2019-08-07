@@ -18,6 +18,12 @@ import '@/styles/index.less'
 // import axios from 'axios'
 // 挂载配置好的axios
 import axios from '@/api'
+
+// 引入 components 文件
+import myPlugin from '@/components'
+// 使用注册的 components 插件
+Vue.use(myPlugin)
+
 // 全局挂载axiso
 Vue.prototype.$http = axios
 
