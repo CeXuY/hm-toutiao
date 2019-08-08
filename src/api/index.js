@@ -6,12 +6,24 @@ import axios from 'axios'
 import store from '@/store'
 // import { Promise } from 'fs'
 
+// 导入json-BigInt包    解决数字最大安全值的问题
+import JSONBIG from 'json-bigint'
+
 // 进行配置(基准路径)
 axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0/'
 // 配置请求头
 // axios.defaults.header = {
 //   Authorization: `Bearer ${store.getUser().token}`
 // }
+
+// 导出响应回来的数字  进行最大值的修改
+axios.defaults.transformResponse = [(data) => {
+  // 对data进行转换   data为原始json字符   return 返回转化后的结果
+  // 如果data 在删除接口返回的是 null  使用JSONBIG转换 null 会报错
+  try { return JSONBIG.parse(data) } catch (e) {
+    return data
+  }
+}]
 
 axios.interceptors.request.use((config) => {
   // 修改  在每次请求前  获取一次 token 头部

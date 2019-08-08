@@ -83,9 +83,9 @@
         <!-- 操作按钮 -->
         <el-table-column label="操作" width="120px">
           <template slot-scope="scope">
-            <el-button type="primary" icon="el-icon-edit" circle plain></el-button>
+            <el-button type="primary" @click="edit(scope.row.id)" icon="el-icon-edit" circle plain></el-button>
             <!-- 删除数据根据id删除 -->
-            <el-button type="danger" @click="scope.row.id" icon="el-icon-delete" circle plain></el-button>
+            <el-button type="danger" @click="del(scope.row.id)" icon="el-icon-delete" circle plain></el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -166,6 +166,30 @@ export default {
   },
 
   methods: {
+    // 编辑文章方法
+    edit (id) {
+      // 编辑文章 和 发布文章 使用的是同一个路由规则
+      // 如果使用 params 是路径传参  publish   /publish/1000   这就是两个路由规则
+      // 使用query 传参   /publish    /publish/?id=10
+      this.$router.push('/publish/?id=' + id)
+    },
+    // 删除文章
+    del (id) {
+      // 弹出一个确认框
+      // 点击确认   发起删除请求
+      // 删除成功   提示   更新列表
+      this.$confirm('此操作将永久删除该文章, 是否继续?', '温馨提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then(async () => {
+          await this.$http.delete(`articles/${id}`)
+          this.$message.success('该文章删除成功')
+          this.getArticles()
+        })
+        .catch(() => {})
+    },
     // 选择日期后的函数
     changeDate (dataArr) {
       // dataArr [起始日期，结束日期]
