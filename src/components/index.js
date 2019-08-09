@@ -2,6 +2,7 @@
 // 作用：注册 components下的所有组件为全局组件
 import MyBread from '@/components/my-bread'
 import MyText from '@/components/my-text'
+import MyChannel from '@/components/my-channel'
 
 // vue 插件定义的规则： 暴露一个对象 { } 在对象中选项 install 对应一个函数   函数形参是Vue对象
 export default {
@@ -10,6 +11,7 @@ export default {
     // Vue 全局注册即可
     Vue.component(MyBread.name, MyBread)
     Vue.component(MyText.name, MyText)
+    Vue.component(MyChannel.name, MyChannel)
   }
 
 }

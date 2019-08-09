@@ -4,7 +4,7 @@
     <el-card>
       <!-- 头部 -->
       <div slot="header" class="clearfix">
-        <my-bread>粉丝管理</my-bread>
+        <my-bread>内容管理</my-bread>
       </div>
       <!-- 表单 -->
       <el-form label-width="80px" size="small">
@@ -18,15 +18,19 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="频道：">
-          <el-select v-model="reqParmams.channel_id" clearable placeholder="请选择">
+          <!-- <el-select v-model="reqParmams.channel_id" clearable placeholder="请选择">
             <el-option
               v-for="item in channelOptions"
               :key="item.id"
               :label="item.name"
               :value="item.id"
             ></el-option>
-          </el-select>
+          </el-select>-->
+
+          <!-- 使用自己定义的 my-channel 组件 -->
+          <my-channel v-model="reqParmams.channel_id"></my-channel>
         </el-form-item>
+
         <el-form-item label="日期：">
           <div class="block">
             <span class="demonstration"></span>
@@ -133,7 +137,7 @@ export default {
       // 收集请求参数 （表单数据）
       reqParmams: {
         status: null,
-        channel_id: null,
+        channel_id: 1,
         begin_pubdate: null,
         end_pubdate: null,
         page: 1,
@@ -150,17 +154,17 @@ export default {
     }
   },
   // 使用侦听器 watch 监听数据
-  watch: {
-    'reqParmams.channel_id': function (newVal) {
-      if (newVal === '') {
-        // axios 不会把参数提交给后台
-        this.reqParmams.channel_id = null
-      }
-    }
-  },
+  // watch: {
+  //   'reqParmams.channel_id': function (newVal) {
+  //     if (newVal === '') {
+  //       // axios 不会把参数提交给后台
+  //       this.reqParmams.channel_id = null
+  //     }
+  //   }
+  // },
   created () {
-    // 获取频道下拉选项数据
-    this.getChannelOptions()
+    // // 获取频道下拉选项数据
+    // this.getChannelOptions()
     // 获取文章列表数据
     this.getArticles()
   },
@@ -217,12 +221,13 @@ export default {
       // 重新渲染列表
       this.getArticles()
     },
-    async getChannelOptions () {
-      const {
-        data: { data }
-      } = await this.$http.get('channels')
-      this.channelOptions = data.channels
-    },
+    // // 获取下拉菜单选项方法
+    // async getChannelOptions () {
+    //   const {
+    //     data: { data }
+    //   } = await this.$http.get('channels')
+    //   this.channelOptions = data.channels
+    // },
     async getArticles () {
       // 请求方式是get 请求方式，传参需要 url?key=value&key1=value1···如果有多项，会很麻烦
       // axios 有另一种传参方式  第二个参数是一个对象 { params:指定参数对象 }  更加便利
