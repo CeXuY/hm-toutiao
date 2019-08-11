@@ -38,7 +38,7 @@
     </el-card>
     <!-- 对话框 -->
     <el-dialog title="添加素材" :visible.sync="dialogVisible" width="300px">
-      <!-- 上传组件 -->
+      <!-- 上传图片组件 -->
       <!-- 不是使用axios 所以需要使用完整路径 -->
       <!-- name 提交给后台的文件的字段名称 -->
       <el-upload

@@ -28,3 +28,12 @@ body {
   height: 178px;
   display: block;
 }
+.articel-container .ql-toolbar.ql-snow {
+  padding: 0 8px;
+}
+.articel-container .ql-editor {
+  height: 300px;
+}
+.my-image .el-dialog__body {
+  padding: 4px 8px;
+}

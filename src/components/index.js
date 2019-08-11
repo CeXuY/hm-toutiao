@@ -3,6 +3,7 @@
 import MyBread from '@/components/my-bread'
 import MyText from '@/components/my-text'
 import MyChannel from '@/components/my-channel'
+import MyImage from '@/components/my-image'
 
 // vue 插件定义的规则： 暴露一个对象 { } 在对象中选项 install 对应一个函数   函数形参是Vue对象
 export default {
@@ -12,6 +13,7 @@ export default {
     Vue.component(MyBread.name, MyBread)
     Vue.component(MyText.name, MyText)
     Vue.component(MyChannel.name, MyChannel)
+    Vue.component(MyImage.name, MyImage)
   }
 
 }

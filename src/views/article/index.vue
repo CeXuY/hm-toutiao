@@ -137,7 +137,7 @@ export default {
       // 收集请求参数 （表单数据）
       reqParmams: {
         status: null,
-        channel_id: 1,
+        channel_id: null,
         begin_pubdate: null,
         end_pubdate: null,
         page: 1,

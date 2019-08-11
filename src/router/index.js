@@ -17,6 +17,8 @@ import NotFound from '@/views/404'
 import store from '@/store'
 // 导入素材管理
 import Image from '@/views/image'
+// 发布文章
+import Publish from '@/views/publish'
 
 Vue.use(VueRouter)
 
@@ -58,6 +60,11 @@ const router = new VueRouter({
           path: '/image',
           name: 'image',
           component: Image
+        },
+        {
+          path: '/publish',
+          name: 'publish',
+          component: Publish
         }
       ]
     },
