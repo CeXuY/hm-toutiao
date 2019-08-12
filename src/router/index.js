@@ -19,6 +19,8 @@ import store from '@/store'
 import Image from '@/views/image'
 // 发布文章
 import Publish from '@/views/publish'
+// 评论管理
+import Comment from '@/views/comment'
 
 Vue.use(VueRouter)
 
@@ -65,6 +67,11 @@ const router = new VueRouter({
           path: '/publish',
           name: 'publish',
           component: Publish
+        },
+        {
+          path: '/comment',
+          name: 'comment',
+          component: Comment
         }
       ]
     },
