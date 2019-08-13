@@ -77,6 +77,8 @@
 <script>
 // 由于用户信息存在sessionStorage中，故需要引入store 模块
 import store from '@/store'
+import eventBus from '@/components/eventBus'
+
 export default {
   data () {
     return {
@@ -87,6 +89,14 @@ export default {
   },
   // 在组件创建时需要取数据
   created () {
+    // 绑定事件(接收用户名)
+    eventBus.$on('updateName', (data) => {
+      this.name = data
+    })
+    // 绑定事件(接收用户头像)
+    eventBus.$on('updatePhoto', (data) => {
+      this.photo = data
+    })
     const user = store.getUser()
     this.name = user.name
     this.photo = user.photo

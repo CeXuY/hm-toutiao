@@ -9,7 +9,13 @@ export default {
   //   设置用户信息
   setUser (user) {
     // 设置存储用户信息
-    window.sessionStorage.setItem(KEY, JSON.stringify(user))
+
+    // 现在是给什么传什么  完整替换之前的信息
+    // 预期给一个字段    就局部修改这个字段即可
+    // 做法：获取本地存储的对象  把传入的对象  合并覆盖到当时存储的对象
+    const localUser = this.getUser()
+    const newUser = { ...localUser, ...user }
+    window.sessionStorage.setItem(KEY, JSON.stringify(newUser))
   },
   // 获取用户信息
   getUser () {
