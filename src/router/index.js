@@ -21,6 +21,9 @@ import Image from '@/views/image'
 import Publish from '@/views/publish'
 // 评论管理
 import Comment from '@/views/comment'
+// 粉丝管理
+import Fans from '@/views/fans'
+// 配置设置路由
 
 Vue.use(VueRouter)
 
@@ -72,7 +75,13 @@ const router = new VueRouter({
           path: '/comment',
           name: 'comment',
           component: Comment
+        },
+        {
+          path: '/fans',
+          name: 'fans',
+          component: Fans
         }
+
       ]
     },
     // 此处的路径是通配路径 404
